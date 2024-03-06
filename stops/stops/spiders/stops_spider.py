@@ -8,6 +8,7 @@ from pydantic import BaseModel, ValidationError, validator
 from ..validators import validate_fields, validate_coordinates
 from typing import Optional
 
+
 class Stop(BaseModel):
     stopId: int
     stopName: Optional[str]
