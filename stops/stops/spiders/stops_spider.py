@@ -33,7 +33,8 @@ class StopsSpider(scrapy.Spider):
                             'stopDesc':stop.get("stopDesc"), 
                             'zoneName':stop.get("zoneName"), 
                             'lat':stop.get("stopLat"), 
-                            'lon':stop.get("stopLon")
+                            'lon':stop.get("stopLon"),
+                            'url':self.start_urls[0]
                         }
                          
 

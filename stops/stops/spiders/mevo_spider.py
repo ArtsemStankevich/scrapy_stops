@@ -6,7 +6,11 @@ class MevoSpider(scrapy.Spider):
     start_urls = [
         'https://gbfs.urbansharing.com/rowermevo.pl/station_information.json'
     ]
-
+    '''
+    custom_settings = {
+        'LOG_LEVEL': 'ERROR'
+    }
+    '''
     def parse(self, response):
         data = json.loads(response.body)
         for station in data['data']['stations']:

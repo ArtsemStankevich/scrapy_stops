@@ -9,7 +9,7 @@ def validate_text_fields(value):
         raise ValueError('Invalid text format')
     return value
 
-def validate_stop_id(value):
+def validate_id(value):
     if not isinstance(value, int) or value < 0:
         raise ValueError('Invalid stopId format')
     return value
@@ -20,7 +20,7 @@ def validate_coordinates(value):
     return value
 
 def validate_address(address):
-    pattern = r'^[\w\s\d.,\-/]+$'
+    pattern = r'^[\w\s\d.,\-/"]+$'
     if not re.match(pattern, address):
         raise ValueError('Invalid address format')
     return address
