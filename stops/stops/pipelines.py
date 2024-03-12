@@ -1,5 +1,5 @@
 from itemadapter import ItemAdapter
-from .validators.main_validators import validate_text_fields, validate_coordinates, validate_id, validate_address
+from .validators.main_validators import validate_fields, validate_opening_hours, validate_city, validate_text_fields, validate_coordinates, validate_id, validate_address
 
 class StopsPipeline:
     def process_item(self, item, spider):
@@ -33,6 +33,22 @@ class ValidationPipelineMevo:
                 item['lat'] = validate_coordinates(item['lat'])
                 item['lon'] = validate_coordinates(item['lon'])
                 item['url'] = spider.start_urls[0]
+            except ValueError as e:
+                print(f"Validation error: {e}")
+                print(item['url'])
+                raise DropItem(f"Validation error: {e}")
+            return item
+        else:
+            return item
+
+class ValidationPipelineSupermarket:
+    def process_item(self, item, spider):
+        if spider.name == 'okazjum':
+            try:
+                item['business'] = validate_fields(item['business'])
+                item['address'] = validate_address(item['address'])
+                item['city'] = validate_city(item['city'])
+                item['opening_hours'] = validate_opening_hours(item['opening_hours'])
             except ValueError as e:
                 print(f"Validation error: {e}")
                 print(item['url'])
