@@ -1,5 +1,5 @@
 from itemadapter import ItemAdapter
-from .validators.main_validators import validate_fields, validate_opening_hours, validate_city, validate_text_fields, validate_coordinates, validate_id, validate_address
+from .validators.main_validators import validate_postcode, validate_categories, validate_fields, validate_opening_hours, validate_city, validate_text_fields, validate_coordinates, validate_id, validate_address
 
 class StopsPipeline:
     def process_item(self, item, spider):
@@ -53,6 +53,14 @@ class ValidationPipelineSupermarket:
                 print(f"Validation error: {e}")
                 print(item['url'])
                 raise DropItem(f"Validation error: {e}")
+            return item
+        else:
+            return item
+
+class ValidationPipelineTrojmiasto:
+    def process_item(self, item, spider):
+        if spider.name == 'trojmiasto':
+
             return item
         else:
             return item

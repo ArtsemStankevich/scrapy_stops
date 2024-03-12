@@ -4,7 +4,7 @@ from pydantic import ValidationError, validator
 def validate_text_fields(value):
     if value is None:
         return value
-    pattern = r'^[\w\s\dąćęłńóśźżĄĆĘŁŃÓŚŹŻ\-,.()/\'"]+(\s\(N\\Ż\))?$'
+    pattern = r'^[\w\s\dąćęłńóśźżĄĆĘŁŃÓŚŹŻ&!\-,.()/\'"]+(\s\(N\\Ż\))?$'
     if not re.match(pattern, value):
         raise ValueError('Invalid text format')
     return value
@@ -18,6 +18,21 @@ def validate_opening_hours(value):
     pattern = r'^\d{2}:\d{2}-\d{2}:\d{2}$'
     if not re.match(pattern, value):
         raise ValueError('Invalid opening hours format. Use HH:MM-HH:MM')
+    return value
+
+def validate_categories(categories):
+    if not isinstance(categories, list):
+        raise ValueError("Categories must be a list")
+    for category in categories:
+        pattern = r'^[\w\s\dąćęłńóśźżĄĆĘŁŃÓŚŹŻ&\-,.()/\'"]+(\s\(N\\Ż\))?$'
+        if not re.match(pattern, category):
+            raise ValueError('Invalid text format')
+    return categories
+
+def validate_postcode(value):
+    pattern = r'^\d{2}-\d{3}$'
+    if not re.match(pattern, value):
+        raise ValueError('Invalid postcode format. Use XX-XXX')
     return value
 
 def validate_id(value):

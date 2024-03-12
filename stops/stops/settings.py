@@ -16,6 +16,8 @@ ITEM_PIPELINES = {
     'stops.pipelines.ValidationPipelineStops': 100,
     'stops.pipelines.ValidationPipelineMevo': 100,
     'stops.pipelines.ValidationPipelineSupermarket': 100,
+    'stops.pipelines.ValidationPipelineTrojmiasto': 100,
+
 }
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
